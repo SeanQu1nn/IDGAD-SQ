@@ -1,0 +1,24 @@
+{
+  "levelId": 3,
+  "levelName": "Building Skills",
+  "goodDucks": 5,
+  "decoyDucks": 1,
+  "maxTotalSpawns": 9,
+  "timeLimit": 25,
+  "spawnRate": 2.2,
+  "duckLifetime": 4.0,
+  "decoyPenalty": 2,
+  "sizeDistribution": {
+    "large": 0.6,
+    "medium": 0.35,
+    "small": 0.05
+  },
+  "specialMechanics": [],
+  "backgroundMusic": "tutorial_theme",
+  "difficulty": "easy",
+  "designNotes": "First small ducks appear. 3 backup spawns maintain learning environment.",
+  "targetSuccessRate": 0.85,
+  "learningObjective": "Introduce small ducks and establish rhythm",
+  "powerUpsAvailable": false,
+  "continueSpawning": true
+}

@@ -1,0 +1,24 @@
+{
+  "levelId": 2,
+  "levelName": "First Challenge",
+  "goodDucks": 4,
+  "decoyDucks": 1,
+  "maxTotalSpawns": 8,
+  "timeLimit": 25,
+  "spawnRate": 2.5,
+  "duckLifetime": 4.5,
+  "decoyPenalty": 2,
+  "sizeDistribution": {
+    "large": 0.7,
+    "medium": 0.3,
+    "small": 0.0
+  },
+  "specialMechanics": [],
+  "backgroundMusic": "tutorial_theme",
+  "difficulty": "tutorial",
+  "designNotes": "Introduce decoys with minimal penalty. 3 backup spawns for learning decoy mechanics.",
+  "targetSuccessRate": 0.90,
+  "learningObjective": "Introduce decoy concept with minimal penalty",
+  "powerUpsAvailable": false,
+  "continueSpawning": true
+}
