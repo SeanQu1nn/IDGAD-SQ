@@ -3123,11 +3123,11 @@ MonoBehaviour:
   sfxSource: {fileID: 0}
   menuMusic: {fileID: 8300000, guid: 9362a74eed4b9a94db2dfc18cdb2c4c0, type: 3}
   gameOverMusic: {fileID: 0}
-  victoryMusic: {fileID: 8300000, guid: cf8cf3531367bc54baeade52cabb920f, type: 3}
-  tutorialTheme: {fileID: 8300000, guid: 27f9f632fa21cf945a234b38395afc92, type: 3}
-  actionTheme: {fileID: 8300000, guid: b77acbb374058480dbeae07444542e03, type: 3}
-  challengeTheme: {fileID: 8300000, guid: ae40a015c678644b0ac6139e22717c04, type: 3}
-  bossTheme: {fileID: 8300000, guid: ab372a7a374be074cb54cb03af2b1625, type: 3}
+  victoryMusic: {fileID: 8300000, guid: f5c5662c56d9a494f9c883ed936882f4, type: 3}
+  tutorialTheme: {fileID: 8300000, guid: 4041a42eb5b57684b9496d980e3f84c0, type: 3}
+  actionTheme: {fileID: 8300000, guid: 4041a42eb5b57684b9496d980e3f84c0, type: 3}
+  challengeTheme: {fileID: 8300000, guid: 4041a42eb5b57684b9496d980e3f84c0, type: 3}
+  bossTheme: {fileID: 8300000, guid: 4041a42eb5b57684b9496d980e3f84c0, type: 3}
   levelStartSound: {fileID: 0}
   levelCompleteSound: {fileID: 8300000, guid: dc007764a28944f4a817995861598f90, type: 3}
   gameOverSound: {fileID: 0}
