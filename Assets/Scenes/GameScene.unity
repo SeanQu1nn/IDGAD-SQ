@@ -1507,7 +1507,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   comboResetTime: 4
   spawnRateMin: 0.25
-  spawnRateDecrease: 0.1
+  spawnRateDecrease: 0.2
+  comboBonusMultiplier: 2
 --- !u!4 &746350468
 Transform:
   m_ObjectHideFlags: 0
@@ -3903,8 +3904,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: COMBO! = 0
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: a8fea61b63955be4980d767f96073b55, type: 2}
+  m_sharedMaterial: {fileID: 1764590807201455615, guid: a8fea61b63955be4980d767f96073b55, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
