@@ -496,12 +496,20 @@ public class DuckSpawner : MonoBehaviour
         // Return the random position (Z = 0 for 2D games)
         return new Vector3(x, y, 0);
     }
-    
+
+    public float CurrentSpawnRate => currentLevel.spawnRate;
+
+    public void SetSpawnRate(float newRate)
+    {
+        currentLevel.spawnRate = newRate;
+        Debug.Log("Spawn rate updated to: " + newRate);
+    }
+
     #endregion
-    
+
     #region Cleanup
     // Ensures proper cleanup when the spawner is destroyed
-    
+
     /// <summary>
     /// Called when this GameObject is being destroyed
     /// Ensures we clean up properly to prevent memory leaks
