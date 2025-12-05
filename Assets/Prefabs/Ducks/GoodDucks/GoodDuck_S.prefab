@@ -77,7 +77,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: 628b9b0283e7f514eb0deddb3296cf54, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -150,7 +150,7 @@ MonoBehaviour:
   pointValue: 5
   lifetime: 5
   moveSpeed: 3
-  destroyEffect: {fileID: 0}
+  destroyEffect: {fileID: 6347126330618017933, guid: c3d761cad5f88c745bab4a9289ec60b3, type: 3}
   clickSound: {fileID: 0}
   successParticles: {fileID: 0}
   successTextPrefab: {fileID: 0}

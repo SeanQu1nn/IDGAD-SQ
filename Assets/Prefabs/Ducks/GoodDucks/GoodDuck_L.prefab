@@ -150,7 +150,7 @@ MonoBehaviour:
   pointValue: 1
   lifetime: 5
   moveSpeed: 3
-  destroyEffect: {fileID: 0}
+  destroyEffect: {fileID: 6347126330618017933, guid: 0d9ad226e367f694dae0f4ac9f6aeff5, type: 3}
   clickSound: {fileID: 0}
   successParticles: {fileID: 0}
   successTextPrefab: {fileID: 0}
