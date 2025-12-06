@@ -5,13 +5,15 @@ public class ComboController : MonoBehaviour
     public static ComboController Instance;
 
     [Header("Combo Settings")]
-    public float comboResetTime = 1.0f;     // Time allowed between clicks
-    public float spawnRateMin = 0.25f;      // Minimum spawn interval
-    public float spawnRateDecrease = 0.1f;  // Spawn rate reduction per combo
-    public int comboBonusMultiplier = 1;    // How much score bonus each combo gives
+    public float comboResetTime = 1.0f;
 
     private float comboTimer = 0f;
     private int comboCount = 0;
+
+    private const int MAX_COMBO = 6;
+
+    private DuckSpawner spawner;
+    private float baseSpawnRate = 1f;
 
     public event System.Action<int> OnComboChanged;
 
@@ -19,6 +21,20 @@ public class ComboController : MonoBehaviour
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
+    }
+
+    private void Start()
+    {
+        spawner = FindAnyObjectByType<DuckSpawner>();
+
+        if (spawner != null)
+        {
+            baseSpawnRate = spawner.CurrentSpawnRate;
+        }
+        else
+        {
+            Debug.LogWarning("ComboController: No DuckSpawner found in scene.");
+        }
     }
 
     private void Update()
@@ -29,48 +45,48 @@ public class ComboController : MonoBehaviour
 
             if (comboTimer >= comboResetTime)
             {
-                comboCount = 0;
-                comboTimer = 0;
-                OnComboChanged?.Invoke(comboCount);
+                ResetCombo();
             }
         }
     }
 
     public void OnDuckClicked()
     {
-        comboCount++;
+        comboCount = Mathf.Min(comboCount + 1, MAX_COMBO);
         comboTimer = 0f;
 
         OnComboChanged?.Invoke(comboCount);
 
-        // Speed up duck spawns
-        var spawner = FindAnyObjectByType<DuckSpawner>();
         if (spawner != null)
         {
-            float newRate = Mathf.Max(spawner.CurrentSpawnRate - spawnRateDecrease, spawnRateMin);
+            float newRate = CalculateSpawnRate(comboCount);
             spawner.SetSpawnRate(newRate);
         }
+    }
 
-        // Score bonus per combo
-        if (comboCount > 1)
+    private float CalculateSpawnRate(int combo)
+    {
+        // Each combo gives 15% faster spawn rate
+        float modifier = 1f + combo * 0.15f;
+
+        float newRate = baseSpawnRate / modifier;
+
+        // Hard cap: no faster than 2× base speed
+        float minRate = baseSpawnRate * 0.5f;
+
+        return Mathf.Max(newRate, minRate);
+    }
+
+    private void ResetCombo()
+    {
+        comboCount = 0;
+        comboTimer = 0f;
+
+        OnComboChanged?.Invoke(comboCount);
+
+        if (spawner != null)
         {
-            var gm = GameManager.Instance;
-
-            if (gm != null)
-            {
-                // Find AddScore(int) automatically without needing to modify GM
-                var addScoreMethod = gm.GetType().GetMethod("AddScore");
-
-                if (addScoreMethod != null)
-                {
-                    int bonus = comboCount * comboBonusMultiplier;
-                    addScoreMethod.Invoke(gm, new object[] { bonus });
-                }
-                else
-                {
-                    Debug.LogWarning("ComboController: GameManager has no AddScore(int) method, score bonus skipped.");
-                }
-            }
+            spawner.SetSpawnRate(baseSpawnRate);
         }
     }
 }
