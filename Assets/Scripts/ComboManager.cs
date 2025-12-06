@@ -12,8 +12,11 @@ public class ComboController : MonoBehaviour
 
     private const int MAX_COMBO = 6;
 
-    private DuckSpawner spawner;
-    private float baseSpawnRate = 1f;
+    private DuckSpawner mainSpawner;
+    private DecoyDuckSpawner decoySpawner;
+
+    private float baseMainRate = 1.2f; // slightly slower than before
+    private float baseDecoyRate = 3f;
 
     public event System.Action<int> OnComboChanged;
 
@@ -25,16 +28,14 @@ public class ComboController : MonoBehaviour
 
     private void Start()
     {
-        spawner = FindAnyObjectByType<DuckSpawner>();
+        mainSpawner = FindAnyObjectByType<DuckSpawner>();
+        decoySpawner = FindAnyObjectByType<DecoyDuckSpawner>();
 
-        if (spawner != null)
-        {
-            baseSpawnRate = spawner.CurrentSpawnRate;
-        }
-        else
-        {
-            Debug.LogWarning("ComboController: No DuckSpawner found in scene.");
-        }
+        if (mainSpawner != null)
+            baseMainRate = mainSpawner.CurrentSpawnRate;
+
+        if (decoySpawner != null)
+            baseDecoyRate = decoySpawner.CurrentSpawnRate;
     }
 
     private void Update()
@@ -57,36 +58,42 @@ public class ComboController : MonoBehaviour
 
         OnComboChanged?.Invoke(comboCount);
 
-        if (spawner != null)
-        {
-            float newRate = CalculateSpawnRate(comboCount);
-            spawner.SetSpawnRate(newRate);
-        }
+        if (mainSpawner != null)
+            mainSpawner.SetSpawnRate(CalcMainRate(comboCount));
+
+        if (decoySpawner != null)
+            decoySpawner.SetSpawnRate(CalcDecoyRate(comboCount));
     }
 
-    private float CalculateSpawnRate(int combo)
+    private float CalcMainRate(int combo)
     {
-        // Each combo gives 15% faster spawn rate
-        float modifier = 1f + combo * 0.15f;
-
-        float newRate = baseSpawnRate / modifier;
-
-        // Hard cap: no faster than 2× base speed
-        float minRate = baseSpawnRate * 0.5f;
-
+        // Main ducks: 10% faster per combo level
+        float modifier = 1f + combo * 0.10f;
+        float newRate = baseMainRate / modifier;
+        float minRate = baseMainRate * 0.6f; // never faster than 60% of base
         return Mathf.Max(newRate, minRate);
     }
 
-    private void ResetCombo()
+    private float CalcDecoyRate(int combo)
+    {
+        // Decoys: increase spawn speed gently
+        float modifier = 1f + combo * 0.05f;
+        float newRate = baseDecoyRate / modifier;
+        float minRate = baseDecoyRate * 0.7f;
+        return Mathf.Max(newRate, minRate);
+    }
+
+    public void ResetCombo()
     {
         comboCount = 0;
         comboTimer = 0f;
 
         OnComboChanged?.Invoke(comboCount);
 
-        if (spawner != null)
-        {
-            spawner.SetSpawnRate(baseSpawnRate);
-        }
+        if (mainSpawner != null)
+            mainSpawner.SetSpawnRate(baseMainRate);
+
+        if (decoySpawner != null)
+            decoySpawner.SetSpawnRate(baseDecoyRate);
     }
 }

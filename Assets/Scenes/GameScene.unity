@@ -1505,10 +1505,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a3cd9f0cff20bf44bf072f91e33f8b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  comboResetTime: 4
-  spawnRateMin: 0.25
-  spawnRateDecrease: 0.2
-  comboBonusMultiplier: 2
+  comboResetTime: 3
 --- !u!4 &746350468
 Transform:
   m_ObjectHideFlags: 0
