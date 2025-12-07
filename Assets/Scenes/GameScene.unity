@@ -269,6 +269,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 029e312c3d1e1e24f9e46ad5596cecd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultBackground6Plus: {fileID: 1899570795475324879, guid: 9f7ad637f9466fd419d7a4f4cef71914, type: 3}
+  levelOverrides: []
 --- !u!4 &27378207
 Transform:
   m_ObjectHideFlags: 0
