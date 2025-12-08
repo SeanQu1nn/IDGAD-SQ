@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      IDGAD-Menuflippedwstart_0: -7000011418240194938
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

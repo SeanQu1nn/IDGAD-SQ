@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 251516885786172104}
   - component: {fileID: 5094551415460283529}
   - component: {fileID: 6908825711674646287}
+  - component: {fileID: -7778286003171660270}
   m_Layer: 0
   m_Name: DecoyDuck_M
   m_TagString: DecoyDuck
@@ -158,3 +159,17 @@ MonoBehaviour:
   penaltyTextPrefab: {fileID: 0}
   spriteRenderer: {fileID: 251516885786172104}
   subtleVisualDifference: 1
+--- !u!114 &-7778286003171660270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2979584664770396576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b776185fdf2f9a4d95e5aef1c810f17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  decoyPrefab: {fileID: 2979584664770396576}
+  CurrentSpawnRate: 1.2

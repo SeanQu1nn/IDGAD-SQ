@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     
     [Header("Game Configuration")]
     [SerializeField] private int startingLives = 1;    // Number of lives player starts with
-    [SerializeField] private int currentLevelId = 1;   // Current level being played
+    [SerializeField] public int currentLevelId = 1;   // Current level being played
     
     [Header("Testing Tools")]
     [SerializeField] private int testLevelId = 12;     // Level to jump to for testing
@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int totalGoodDucksSpawned = 0; // Total good ducks spawned this level
     
     // Private state variables
-    private LevelData currentLevel;                     // Data for the current level
+    public LevelData currentLevel;                     // Data for the current level
     private GameState currentState = GameState.Menu;    // Current game state
     private float levelStartTime;                       // When the level started
     private int totalDucksSpawned = 0;                  // Total ducks spawned this level
