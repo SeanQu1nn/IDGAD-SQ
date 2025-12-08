@@ -228,7 +228,7 @@ public class AudioManager : MonoBehaviour
                 break;
         }
     }
-
+    
     /// <summary>
     /// Changes music based on the loaded level
     /// 
@@ -237,37 +237,32 @@ public class AudioManager : MonoBehaviour
     /// </summary>
     private void OnLevelLoaded(LevelData levelData)
     {
-        if (GameManager.Instance == null)
-            return;
-
-        //  Only react while actually playing
-        if (GameManager.Instance.CurrentState == GameState.Menu)
-            return;
-
-        int level = GameManager.Instance.CurrentLevelId;
-
-        //  LEVELS 1–6  EARLY GAME THEME
-        if (level >= 1 && level <= 6)
+        // Don't change music if we're still in the menu
+        if (GameManager.Instance != null && GameManager.Instance.CurrentState == GameState.Menu)
         {
-            if (tutorialTheme != null)
+            return;
+        }
+        
+        if (levelData != null && !string.IsNullOrEmpty(levelData.backgroundMusic))
+        {
+            AudioClip levelMusic = GetLevelMusic(levelData.backgroundMusic);
+            if (levelMusic != null)
             {
+                PlayMusic(levelMusic);
+            }
+            else
+            {
+                // Fallback to tutorial theme if music not found
                 PlayMusic(tutorialTheme);
             }
-            return;
         }
-
-        //  LEVELS 7–12  LATE GAME THEME
-        if (level >= 7)
+        else
         {
-            if (actionTheme != null)
-            {
-                PlayMusic(actionTheme);
-            }
-            return;
+            // Default to tutorial theme if no music specified
+            PlayMusic(tutorialTheme);
         }
     }
-
-
+    
     /// <summary>
     /// Converts music name strings to actual AudioClip objects
     /// 

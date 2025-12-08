@@ -68,30 +68,32 @@ public class LevelLoader : MonoBehaviour
     }
 
     // Generates levels 1 to 12 with increasing difficulty.
+    // Level 1 = 3 ducks, Level 12 = 25 ducks.
     private LevelData CreateAutoLevel(int levelId)
     {
-        // Scale good ducks 3 to 25 across 12 levels
+        // Scale good ducks 3 to 25 across 12 levels (this is the WIN condition)
         float progress = (levelId - 1) / 11f;
         int goodDucks = Mathf.RoundToInt(Mathf.Lerp(3, 25, progress));
+
+        // --- EXTRA DUCKS FOR SPAWNING ---
+        int extraDucksToSpawn = 2; // Add 2 extra ducks per level
+        int totalGoodDucksToSpawn = goodDucks + extraDucksToSpawn;
 
         LevelData data = new LevelData
         {
             levelId = levelId,
             levelName = "Level " + levelId,
 
-            goodDucks = goodDucks,
+            goodDucks = goodDucks,                     // WIN condition stays the same
             decoyDucks = Mathf.RoundToInt(goodDucks * 0.2f),
 
-            // Time increases with level (30s  35s)
-            timeLimit = Mathf.Lerp(30f, 35f, progress),
-
+            timeLimit = Mathf.Lerp(30f, 20f, progress),
             spawnRate = Mathf.Lerp(2.8f, 1.4f, progress),
+
             duckLifetime = Mathf.Lerp(5f, 3f, progress),
             decoyPenalty = 3,
 
-            //  FIX: Always enough total spawns for late levels
-            maxTotalSpawns = goodDucks + Mathf.RoundToInt(goodDucks * 0.3f),
-
+            maxTotalSpawns = totalGoodDucksToSpawn,   // SPAWN pool increased
             continueSpawning = true,
 
             sizeDistribution = new LevelData.SizeDistribution
