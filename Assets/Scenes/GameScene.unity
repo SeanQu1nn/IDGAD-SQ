@@ -3213,9 +3213,9 @@ MonoBehaviour:
   gameOverMusic: {fileID: 0}
   victoryMusic: {fileID: 8300000, guid: f5c5662c56d9a494f9c883ed936882f4, type: 3}
   tutorialTheme: {fileID: 8300000, guid: 4041a42eb5b57684b9496d980e3f84c0, type: 3}
-  actionTheme: {fileID: 8300000, guid: 4041a42eb5b57684b9496d980e3f84c0, type: 3}
-  challengeTheme: {fileID: 8300000, guid: 4041a42eb5b57684b9496d980e3f84c0, type: 3}
-  bossTheme: {fileID: 8300000, guid: 4041a42eb5b57684b9496d980e3f84c0, type: 3}
+  actionTheme: {fileID: 8300000, guid: 726ed852b8b383e4da6675e795dbbf6c, type: 3}
+  challengeTheme: {fileID: 8300000, guid: 726ed852b8b383e4da6675e795dbbf6c, type: 3}
+  bossTheme: {fileID: 8300000, guid: 726ed852b8b383e4da6675e795dbbf6c, type: 3}
   levelStartSound: {fileID: 0}
   levelCompleteSound: {fileID: 8300000, guid: dc007764a28944f4a817995861598f90, type: 3}
   gameOverSound: {fileID: 0}
