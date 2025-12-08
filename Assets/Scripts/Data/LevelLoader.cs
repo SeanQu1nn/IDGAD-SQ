@@ -1,27 +1,21 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-[System.Serializable]
-public class LevelOverride
-{
-    public int levelId;      // Level this override applies to
-    public Sprite sprite;    // Sprite for this level
-}
-
 public class LevelLoader : MonoBehaviour
 {
     public static LevelLoader Instance { get; private set; }
 
-    private Dictionary<int, LevelData> levelCache = new Dictionary<int, LevelData>();
+    [Header("Total Levels In Game")]
+    public int totalLevels = 12;
 
-    [Header("Default Background for Level 6 and above")]
-    public Sprite defaultBackground6Plus; // Drag your default level 6+ sprite here
+    [Header("Default Background for Level 7+")]
+    public Sprite defaultBackground7Plus;
 
-    [Header("Optional Level Overrides (6+)")]
+    [Header("Level Overrides (Backgrounds)")]
     public List<LevelOverride> levelOverrides = new List<LevelOverride>();
 
-    // Internal lookup for fast access
     private Dictionary<int, Sprite> overrideLookup = new Dictionary<int, Sprite>();
+    private Dictionary<int, LevelData> levelCache = new Dictionary<int, LevelData>();
 
     void Awake()
     {
@@ -36,7 +30,7 @@ public class LevelLoader : MonoBehaviour
             return;
         }
 
-        // Build fast lookup dictionary for per-level overrides
+        // Build override lookup table
         foreach (var o in levelOverrides)
         {
             if (!overrideLookup.ContainsKey(o.levelId))
@@ -49,94 +43,87 @@ public class LevelLoader : MonoBehaviour
         if (levelCache.ContainsKey(levelId))
             return levelCache[levelId];
 
-        string fileName = $"level_{levelId:D3}";
-        TextAsset levelFile = Resources.Load<TextAsset>($"Data/Levels/{fileName}");
+        // Generate level dynamically (no JSON)
+        LevelData level = CreateAutoLevel(levelId);
 
-        LevelData levelData;
-
-        if (levelFile != null)
+        // Assign background
+        if (levelId >= 7)
         {
-            try
-            {
-                levelData = JsonUtility.FromJson<LevelData>(levelFile.text);
-            }
-            catch (System.Exception e)
-            {
-                Debug.LogError($"Failed to parse level {levelId}: {e.Message}");
-                levelData = CreateDefaultLevel(levelId);
-            }
-        }
-        else
-        {
-            Debug.LogWarning($"Level file not found: {fileName}");
-            levelData = CreateDefaultLevel(levelId);
-        }
-
-        // Apply background for levels 6+ automatically
-        if (levelId >= 6)
-        {
-            // Step 1: Use per-level override if exists
             if (overrideLookup.ContainsKey(levelId))
-                levelData.backgroundSprite = overrideLookup[levelId];
-            // Step 2: Otherwise, apply default
-            else if (defaultBackground6Plus != null)
-                levelData.backgroundSprite = defaultBackground6Plus;
-            // Step 3: If neither, keep existing LevelData backgroundSprite
+                level.backgroundSprite = overrideLookup[levelId];
+            else if (defaultBackground7Plus != null)
+                level.backgroundSprite = defaultBackground7Plus;
         }
 
-        levelCache[levelId] = levelData;
-        return levelData;
+        levelCache[levelId] = level;
+        return level;
     }
 
     public int GetNextLevelId(int currentLevelId)
     {
-        int nextLevelId = currentLevelId + 1;
-        string fileName = $"level_{nextLevelId:D3}";
-        TextAsset levelFile = Resources.Load<TextAsset>($"Data/Levels/{fileName}");
-        return levelFile != null ? nextLevelId : -1;
+        if (currentLevelId >= totalLevels)
+            return -1;
+
+        return currentLevelId + 1;
     }
 
-    private LevelData CreateDefaultLevel(int levelId)
+    // Generates levels 1 to 12 with increasing difficulty.
+    // Level 1 = 3 ducks, Level 12 = 25 ducks.
+    private LevelData CreateAutoLevel(int levelId)
     {
-        LevelData defaultLevel = new LevelData
+        // Scale good ducks 3 to 25 across 12 levels (this is the WIN condition)
+        float progress = (levelId - 1) / 11f;
+        int goodDucks = Mathf.RoundToInt(Mathf.Lerp(3, 25, progress));
+
+        // --- EXTRA DUCKS FOR SPAWNING ---
+        int extraDucksToSpawn = 2; // Add 2 extra ducks per level
+        int totalGoodDucksToSpawn = goodDucks + extraDucksToSpawn;
+
+        LevelData data = new LevelData
         {
             levelId = levelId,
-            levelName = $"Default Level {levelId}",
-            goodDucks = 3,
-            decoyDucks = 1,
-            timeLimit = 30f,
-            spawnRate = 3.0f,
-            duckLifetime = 5.0f,
+            levelName = "Level " + levelId,
+
+            goodDucks = goodDucks,                     // WIN condition stays the same
+            decoyDucks = Mathf.RoundToInt(goodDucks * 0.2f),
+
+            timeLimit = Mathf.Lerp(30f, 20f, progress),
+            spawnRate = Mathf.Lerp(2.8f, 1.4f, progress),
+
+            duckLifetime = Mathf.Lerp(5f, 3f, progress),
             decoyPenalty = 3,
+
+            maxTotalSpawns = totalGoodDucksToSpawn,   // SPAWN pool increased
+            continueSpawning = true,
+
             sizeDistribution = new LevelData.SizeDistribution
             {
-                large = 0.6f,
-                medium = 0.3f,
-                small = 0.1f
+                large = 0.5f,
+                medium = 0.35f,
+                small = 0.15f
             },
+
             specialMechanics = new string[0],
-            backgroundMusic = "tutorial_theme",
+            backgroundMusic = "level_theme",
             difficulty = "normal",
-            designNotes = "Default level created due to missing level file",
+            designNotes = "Auto-generated level",
             targetSuccessRate = 0.8f,
-            learningObjective = "Complete the level",
+            learningObjective = "Hit all ducks",
             powerUpsAvailable = false
         };
 
-        // Auto-assign background for level 6+ using same priority
-        if (levelId >= 6)
-        {
-            if (overrideLookup.ContainsKey(levelId))
-                defaultLevel.backgroundSprite = overrideLookup[levelId];
-            else if (defaultBackground6Plus != null)
-                defaultLevel.backgroundSprite = defaultBackground6Plus;
-        }
-
-        return defaultLevel;
+        return data;
     }
 
     public void ClearCache()
     {
         levelCache.Clear();
     }
+}
+
+[System.Serializable]
+public class LevelOverride
+{
+    public int levelId;
+    public Sprite sprite;
 }

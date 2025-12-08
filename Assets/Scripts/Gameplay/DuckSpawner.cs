@@ -18,6 +18,7 @@ public class DuckSpawner : MonoBehaviour
     // ===== DUCK PREFABS =====
     // These arrays store the different duck prefabs that can be spawned
     // Each array has exactly 3 elements: Large, Medium, and Small ducks
+
     
     [Header("Duck Prefabs")]
     [SerializeField] private GameObject[] goodDuckPrefabs; // [0]=Large, [1]=Medium, [2]=Small
@@ -56,6 +57,7 @@ public class DuckSpawner : MonoBehaviour
     
     private Coroutine spawnCoroutine;  // Reference to the currently running spawn coroutine
     
+
     #region Unity Lifecycle
     // Unity automatically calls these methods at specific times during the game's lifecycle
     
@@ -549,6 +551,16 @@ public class DuckSpawner : MonoBehaviour
     /// The current level configuration being used for spawning
     /// </summary>
     public LevelData CurrentLevel => currentLevel;
-    
+
     #endregion
+
+    public void AddExtraGoodDucks(int extra)
+    {
+        goodDucksRemaining += extra;
+    }
+
+    public void AddExtraDucks(int extra)
+    {
+        decoyDucksRemaining += extra;
+    }
 }

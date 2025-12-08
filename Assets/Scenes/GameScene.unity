@@ -269,8 +269,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 029e312c3d1e1e24f9e46ad5596cecd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultBackground6Plus: {fileID: 1899570795475324879, guid: 9f7ad637f9466fd419d7a4f4cef71914, type: 3}
-  levelOverrides: []
+  totalLevels: 12
+  defaultBackground7Plus: {fileID: 1899570795475324879, guid: 9f7ad637f9466fd419d7a4f4cef71914, type: 3}
+  levelOverrides:
+  - levelId: 7
+    sprite: {fileID: 1899570795475324879, guid: 9f7ad637f9466fd419d7a4f4cef71914, type: 3}
+  - levelId: 8
+    sprite: {fileID: 1899570795475324879, guid: 9f7ad637f9466fd419d7a4f4cef71914, type: 3}
+  - levelId: 9
+    sprite: {fileID: 1899570795475324879, guid: 9f7ad637f9466fd419d7a4f4cef71914, type: 3}
+  - levelId: 10
+    sprite: {fileID: 1899570795475324879, guid: 9f7ad637f9466fd419d7a4f4cef71914, type: 3}
+  - levelId: 11
+    sprite: {fileID: 1899570795475324879, guid: 9f7ad637f9466fd419d7a4f4cef71914, type: 3}
+  - levelId: 12
+    sprite: {fileID: 1899570795475324879, guid: 9f7ad637f9466fd419d7a4f4cef71914, type: 3}
 --- !u!4 &27378207
 Transform:
   m_ObjectHideFlags: 0
@@ -355,9 +368,9 @@ Canvas:
   m_GameObject: {fileID: 55474491}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
+  m_RenderMode: 1
+  m_Camera: {fileID: 519420031}
+  m_PlaneDistance: 10
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -381,6 +394,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 407759490}
   - {fileID: 940639047}
   - {fileID: 1774303612}
   - {fileID: 482043632}
@@ -775,6 +789,81 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 299827548}
   m_CullTransparentMesh: 1
+--- !u!1 &407759487
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 407759490}
+  - component: {fileID: 407759489}
+  - component: {fileID: 407759488}
+  m_Layer: 5
+  m_Name: Background
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &407759488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 407759487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 7aecf078d69d84c4cb61f21c4b8aa287, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &407759489
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 407759487}
+  m_CullTransparentMesh: 1
+--- !u!224 &407759490
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 407759487}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 55474495}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 960, y: 540}
+  m_SizeDelta: {x: 1920, y: 1080}
+  m_Pivot: {x: 1, y: 1}
 --- !u!1 &422073453
 GameObject:
   m_ObjectHideFlags: 0
@@ -1705,7 +1794,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.29500112}
+  m_AnchoredPosition: {x: 0, y: -0.29500103}
   m_SizeDelta: {x: 0, y: -0.5899977}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &755172723
@@ -2643,7 +2732,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 283, y: -72.85}
+  m_AnchoredPosition: {x: 283, y: -72.850006}
   m_SizeDelta: {x: 500, y: 100.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1198246229
@@ -3376,6 +3465,7 @@ GameObject:
   - component: {fileID: 1774303612}
   - component: {fileID: 1774303614}
   - component: {fileID: 1774303613}
+  - component: {fileID: 1774303615}
   m_Layer: 5
   m_Name: GameOverPanel
   m_TagString: Untagged
@@ -3427,7 +3517,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 7aecf078d69d84c4cb61f21c4b8aa287, type: 3}
+  m_Sprite: {fileID: 1899570795475324879, guid: 9f7ad637f9466fd419d7a4f4cef71914, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3445,6 +3535,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1774303611}
   m_CullTransparentMesh: 1
+--- !u!114 &1774303615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1774303611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9d5b16e82825e146bde7cfcbc6fcd65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  backgroundImage: {fileID: 407759488}
 --- !u!1 &1851145736
 GameObject:
   m_ObjectHideFlags: 0
@@ -3515,6 +3618,29 @@ MonoBehaviour:
   goodDucksClicked: 0
   goodDucksMissed: 0
   totalGoodDucksSpawned: 0
+  currentLevel:
+    levelId: 0
+    levelName: 
+    goodDucks: 0
+    decoyDucks: 0
+    timeLimit: 0
+    spawnRate: 0
+    duckLifetime: 0
+    decoyPenalty: 0
+    maxTotalSpawns: 10
+    continueSpawning: 1
+    sizeDistribution:
+      large: 0
+      medium: 0
+      small: 0
+    specialMechanics: []
+    backgroundMusic: 
+    difficulty: 
+    designNotes: 
+    targetSuccessRate: 0
+    learningObjective: 
+    powerUpsAvailable: 0
+    backgroundSprite: {fileID: 0}
 --- !u!4 &1909912757
 Transform:
   m_ObjectHideFlags: 0
